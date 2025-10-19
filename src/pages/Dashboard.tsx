@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { SensorCard, SensorStatus } from "@/components/SensorCard";
 import { Thermometer, Droplets, Wind, Activity } from "lucide-react";
+import { useBluetoothSensor } from "@/hooks/useBluetoothSensor";
+import { Badge } from "@/components/ui/badge";
 
 interface SensorData {
   temperature: number;
@@ -44,16 +46,30 @@ const simulateSensorData = (): SensorData => ({
 });
 
 export default function Dashboard() {
-  const [sensorData, setSensorData] = useState<SensorData>(simulateSensorData());
+  const [simulatedData, setSimulatedData] = useState<SensorData>(simulateSensorData());
+  const { connectedDevice, sensorData: bluetoothData } = useBluetoothSensor();
+
+  // Use Bluetooth data if available, otherwise use simulated data
+  const sensorData = connectedDevice && bluetoothData 
+    ? {
+        temperature: bluetoothData.temperature ?? simulatedData.temperature,
+        humidity: bluetoothData.humidity ?? simulatedData.humidity,
+        gas: bluetoothData.gas ?? simulatedData.gas,
+        vibration: bluetoothData.vibration ?? simulatedData.vibration,
+        timestamp: bluetoothData.timestamp,
+      }
+    : simulatedData;
 
   useEffect(() => {
-    // Simulate real-time updates every 5 seconds
-    const interval = setInterval(() => {
-      setSensorData(simulateSensorData());
-    }, 5000);
+    // Only run simulated updates if not connected to Bluetooth
+    if (!connectedDevice) {
+      const interval = setInterval(() => {
+        setSimulatedData(simulateSensorData());
+      }, 5000);
 
-    return () => clearInterval(interval);
-  }, []);
+      return () => clearInterval(interval);
+    }
+  }, [connectedDevice]);
 
   return (
     <div className="space-y-6">
@@ -64,9 +80,16 @@ export default function Dashboard() {
             Real-time grain storage monitoring
           </p>
         </div>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <div className="h-2 w-2 bg-success rounded-full animate-pulse" />
-          <span>Live</span>
+        <div className="flex items-center gap-3">
+          {connectedDevice && (
+            <Badge variant="default" className="bg-primary">
+              Bluetooth Connected
+            </Badge>
+          )}
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="h-2 w-2 bg-success rounded-full animate-pulse" />
+            <span>Live</span>
+          </div>
         </div>
       </div>
 
@@ -114,8 +137,16 @@ export default function Dashboard() {
           Last updated: {new Date(sensorData.timestamp).toLocaleString()}
         </p>
         <p className="text-sm text-muted-foreground mt-2">
-          Auto-refresh every 5 seconds • Connected to IoT sensors
+          {connectedDevice 
+            ? `Connected to Bluetooth sensor: ${connectedDevice.name}` 
+            : "Auto-refresh every 5 seconds • Simulated sensor data"
+          }
         </p>
+        {!connectedDevice && (
+          <p className="text-xs text-warning mt-2">
+            💡 Connect a Bluetooth sensor in Settings for real sensor data
+          </p>
+        )}
       </div>
     </div>
   );

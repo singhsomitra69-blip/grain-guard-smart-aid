@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Settings as SettingsIcon, Bell, Wifi } from "lucide-react";
+import { BluetoothConnection } from "@/components/BluetoothConnection";
 
 export default function Settings() {
   return (
@@ -144,7 +145,7 @@ export default function Settings() {
           <h2 className="text-xl font-semibold">Connection</h2>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 mb-6">
           <div className="space-y-2">
             <Label>Connection Type</Label>
             <div className="flex gap-2">
@@ -153,12 +154,9 @@ export default function Settings() {
               <Button variant="outline">LoRa</Button>
             </div>
           </div>
-
-          <div className="flex items-center gap-2 p-4 bg-success/10 border border-success/20 rounded-lg">
-            <div className="h-2 w-2 bg-success rounded-full animate-pulse" />
-            <span className="text-sm font-medium">Connected to IoT sensors</span>
-          </div>
         </div>
+
+        <BluetoothConnection />
 
         <div className="flex gap-3 mt-6">
           <Button className="w-full md:w-auto">Save Settings</Button>

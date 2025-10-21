@@ -4,28 +4,58 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import { Settings as SettingsIcon, Bell, Wifi } from "lucide-react";
+import { Settings as SettingsIcon, Bell, Wifi, Languages } from "lucide-react";
 import { BluetoothConnection } from "@/components/BluetoothConnection";
+import { useLanguage, Language } from "@/contexts/LanguageContext";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Settings() {
+  const { t, language, setLanguage } = useLanguage();
+  
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+        <h1 className="text-3xl font-bold text-foreground">{t("settings.title")}</h1>
         <p className="text-muted-foreground">
-          Configure thresholds and notifications
+          {t("settings.subtitle")}
         </p>
       </div>
 
       <Card className="p-6">
         <div className="flex items-center gap-2 mb-6">
+          <Languages className="h-5 w-5 text-primary" />
+          <h2 className="text-xl font-semibold">{t("settings.language")}</h2>
+        </div>
+
+        <div className="space-y-2 mb-6">
+          <Label htmlFor="language">{t("settings.language.select")}</Label>
+          <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
+            <SelectTrigger id="language">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="en">English</SelectItem>
+              <SelectItem value="hi">हिन्दी (Hindi)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <Separator className="my-6" />
+
+        <div className="flex items-center gap-2 mb-6">
           <SettingsIcon className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold">Safety Thresholds</h2>
+          <h2 className="text-xl font-semibold">{t("settings.thresholds")}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <Label htmlFor="temp-max">Maximum Temperature (°C)</Label>
+            <Label htmlFor="temp-max">{t("settings.temp.max")}</Label>
             <Input
               id="temp-max"
               type="number"
@@ -33,12 +63,12 @@ export default function Settings() {
               defaultValue="35"
             />
             <p className="text-xs text-muted-foreground">
-              Alert when temperature exceeds this value
+              {t("settings.temp.alert")}
             </p>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="temp-min">Minimum Temperature (°C)</Label>
+            <Label htmlFor="temp-min">{t("settings.temp.min")}</Label>
             <Input
               id="temp-min"
               type="number"
@@ -48,7 +78,7 @@ export default function Settings() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="humidity-max">Maximum Humidity (%)</Label>
+            <Label htmlFor="humidity-max">{t("settings.humidity.max")}</Label>
             <Input
               id="humidity-max"
               type="number"
@@ -58,7 +88,7 @@ export default function Settings() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="humidity-min">Minimum Humidity (%)</Label>
+            <Label htmlFor="humidity-min">{t("settings.humidity.min")}</Label>
             <Input
               id="humidity-min"
               type="number"
@@ -68,7 +98,7 @@ export default function Settings() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="gas-max">Maximum Gas Level (ppm)</Label>
+            <Label htmlFor="gas-max">{t("settings.gas.max")}</Label>
             <Input
               id="gas-max"
               type="number"
@@ -79,7 +109,7 @@ export default function Settings() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="vibration-max">Maximum Vibration</Label>
+            <Label htmlFor="vibration-max">{t("settings.vibration.max")}</Label>
             <Input
               id="vibration-max"
               type="number"
@@ -93,15 +123,15 @@ export default function Settings() {
 
         <div className="flex items-center gap-2 mb-6">
           <Bell className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold">Notifications</h2>
+          <h2 className="text-xl font-semibold">{t("settings.notifications")}</h2>
         </div>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label>Push Notifications</Label>
+              <Label>{t("settings.notifications.push")}</Label>
               <p className="text-sm text-muted-foreground">
-                Receive alerts on your device
+                {t("settings.notifications.push.desc")}
               </p>
             </div>
             <Switch defaultChecked />
@@ -109,9 +139,9 @@ export default function Settings() {
 
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label>Voice Alerts</Label>
+              <Label>{t("settings.notifications.voice")}</Label>
               <p className="text-sm text-muted-foreground">
-                Enable audio notifications for critical alerts
+                {t("settings.notifications.voice.desc")}
               </p>
             </div>
             <Switch defaultChecked />
@@ -119,9 +149,9 @@ export default function Settings() {
 
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label>SMS Notifications</Label>
+              <Label>{t("settings.notifications.sms")}</Label>
               <p className="text-sm text-muted-foreground">
-                Send text messages for urgent alerts
+                {t("settings.notifications.sms.desc")}
               </p>
             </div>
             <Switch />
@@ -129,9 +159,9 @@ export default function Settings() {
 
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label>AI Prediction Alerts</Label>
+              <Label>{t("settings.notifications.ai")}</Label>
               <p className="text-sm text-muted-foreground">
-                Notify when AI detects spoilage risk
+                {t("settings.notifications.ai.desc")}
               </p>
             </div>
             <Switch defaultChecked />
@@ -142,12 +172,12 @@ export default function Settings() {
 
         <div className="flex items-center gap-2 mb-6">
           <Wifi className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold">Connection</h2>
+          <h2 className="text-xl font-semibold">{t("settings.connection")}</h2>
         </div>
 
         <div className="space-y-4 mb-6">
           <div className="space-y-2">
-            <Label>Connection Type</Label>
+            <Label>{t("settings.connection.type")}</Label>
             <div className="flex gap-2">
               <Button variant="default">Wi-Fi</Button>
               <Button variant="outline">GSM</Button>
@@ -159,9 +189,9 @@ export default function Settings() {
         <BluetoothConnection />
 
         <div className="flex gap-3 mt-6">
-          <Button className="w-full md:w-auto">Save Settings</Button>
+          <Button className="w-full md:w-auto">{t("settings.save")}</Button>
           <Button variant="outline" className="w-full md:w-auto">
-            Reset to Default
+            {t("settings.reset")}
           </Button>
         </div>
       </Card>

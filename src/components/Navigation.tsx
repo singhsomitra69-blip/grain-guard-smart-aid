@@ -9,17 +9,19 @@ import {
   Wheat,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const navItems = [
-  { icon: Home, label: "Dashboard", path: "/" },
-  { icon: Bell, label: "Alerts", path: "/alerts" },
-  { icon: BarChart3, label: "Analytics", path: "/analytics" },
-  { icon: Brain, label: "AI Prediction", path: "/prediction" },
-  { icon: Settings, label: "Settings", path: "/settings" },
+  { icon: Home, labelKey: "nav.dashboard", path: "/" },
+  { icon: Bell, labelKey: "nav.alerts", path: "/alerts" },
+  { icon: BarChart3, labelKey: "nav.analytics", path: "/analytics" },
+  { icon: Brain, labelKey: "nav.prediction", path: "/prediction" },
+  { icon: Settings, labelKey: "nav.settings", path: "/settings" },
 ];
 
 export function Navigation() {
   const location = useLocation();
+  const { t } = useLanguage();
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border p-4 md:relative md:border-t-0 md:border-r md:w-64 md:min-h-screen md:p-6">
@@ -45,7 +47,7 @@ export function Navigation() {
                 )}
               >
                 <Icon className="h-5 w-5" />
-                <span className="hidden md:inline">{item.label}</span>
+                <span className="hidden md:inline">{t(item.labelKey)}</span>
               </Button>
             </Link>
           );

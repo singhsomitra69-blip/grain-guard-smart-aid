@@ -3,6 +3,7 @@ import { SensorCard, SensorStatus } from "@/components/SensorCard";
 import { Thermometer, Droplets, Wind, Activity } from "lucide-react";
 import { useBluetoothSensor } from "@/hooks/useBluetoothSensor";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SensorData {
   temperature: number;
@@ -48,6 +49,7 @@ const simulateSensorData = (): SensorData => ({
 export default function Dashboard() {
   const [simulatedData, setSimulatedData] = useState<SensorData>(simulateSensorData());
   const { connectedDevice, sensorData: bluetoothData } = useBluetoothSensor();
+  const { t } = useLanguage();
 
   // Use Bluetooth data if available, otherwise use simulated data
   const sensorData = connectedDevice && bluetoothData 
@@ -75,15 +77,15 @@ export default function Dashboard() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t("dashboard.title")}</h1>
           <p className="text-muted-foreground">
-            Real-time grain storage monitoring
+            {t("dashboard.subtitle")}
           </p>
         </div>
         <div className="flex items-center gap-3">
           {connectedDevice && (
             <Badge variant="default" className="bg-primary">
-              Bluetooth Connected
+              {t("dashboard.bluetooth.connected")}
             </Badge>
           )}
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -95,56 +97,56 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <SensorCard
-          title="Temperature"
+          title={t("sensor.temperature")}
           value={sensorData.temperature.toFixed(1)}
           unit="°C"
           icon={Thermometer}
           status={getTemperatureStatus(sensorData.temperature)}
-          description="Optimal: 20-30°C"
+          description={sensorData.temperature > 30 ? t("sensor.temp.high") : t("sensor.temp.optimal")}
         />
 
         <SensorCard
-          title="Humidity"
+          title={t("sensor.humidity")}
           value={sensorData.humidity.toFixed(1)}
           unit="%"
           icon={Droplets}
           status={getHumidityStatus(sensorData.humidity)}
-          description="Optimal: 45-65%"
+          description={(sensorData.humidity > 70 || sensorData.humidity < 40) ? t("sensor.humidity.high") : t("sensor.humidity.optimal")}
         />
 
         <SensorCard
-          title="Gas Level"
+          title={t("sensor.gas")}
           value={sensorData.gas.toFixed(2)}
           unit="ppm"
           icon={Wind}
           status={getGasStatus(sensorData.gas)}
-          description="Optimal: <0.3 ppm"
+          description={sensorData.gas > 0.3 ? t("sensor.gas.elevated") : t("sensor.gas.normal")}
         />
 
         <SensorCard
-          title="Vibration"
+          title={t("sensor.vibration")}
           value={sensorData.vibration.toFixed(1)}
           unit="units"
           icon={Activity}
           status={getVibrationStatus(sensorData.vibration)}
-          description="Optimal: <1.0 units"
+          description={sensorData.vibration > 1 ? t("sensor.vibration.detected") : t("sensor.vibration.stable")}
         />
       </div>
 
       <div className="bg-card border border-border rounded-lg p-6">
-        <h2 className="text-lg font-semibold mb-2">System Status</h2>
+        <h2 className="text-lg font-semibold mb-2">{t("dashboard.status.overview")}</h2>
         <p className="text-sm text-muted-foreground">
-          Last updated: {new Date(sensorData.timestamp).toLocaleString()}
+          {t("dashboard.last_updated")}: {new Date(sensorData.timestamp).toLocaleString()}
         </p>
         <p className="text-sm text-muted-foreground mt-2">
           {connectedDevice 
-            ? `Connected to Bluetooth sensor: ${connectedDevice.name}` 
-            : "Auto-refresh every 5 seconds • Simulated sensor data"
+            ? `${t("bluetooth.status.connected")} ${connectedDevice.name}` 
+            : t("dashboard.status.all_systems")
           }
         </p>
         {!connectedDevice && (
           <p className="text-xs text-warning mt-2">
-            💡 Connect a Bluetooth sensor in Settings for real sensor data
+            💡 {t("dashboard.status.check_alerts")}
           </p>
         )}
       </div>

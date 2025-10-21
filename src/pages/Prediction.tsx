@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Brain, TrendingUp, AlertTriangle, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PredictionResult {
   risk: "low" | "medium" | "high";
@@ -24,10 +25,16 @@ const prediction: PredictionResult = {
   ],
 };
 
+
+const riskConfigKeys = {
+  low: "prediction.risk.low",
+  medium: "prediction.risk.medium",
+  high: "prediction.risk.high",
+};
+
 const riskConfig = {
   low: {
     icon: CheckCircle,
-    badge: "Low Risk",
     badgeVariant: "default" as const,
     color: "text-success",
     bgColor: "bg-success/10",
@@ -35,7 +42,6 @@ const riskConfig = {
   },
   medium: {
     icon: AlertTriangle,
-    badge: "Medium Risk",
     badgeVariant: "secondary" as const,
     color: "text-warning",
     bgColor: "bg-warning/10",
@@ -43,7 +49,6 @@ const riskConfig = {
   },
   high: {
     icon: AlertTriangle,
-    badge: "High Risk",
     badgeVariant: "destructive" as const,
     color: "text-destructive",
     bgColor: "bg-destructive/10",
@@ -54,13 +59,14 @@ const riskConfig = {
 export default function Prediction() {
   const config = riskConfig[prediction.risk];
   const Icon = config.icon;
+  const { t } = useLanguage();
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">AI Prediction</h1>
+        <h1 className="text-3xl font-bold text-foreground">{t("prediction.title")}</h1>
         <p className="text-muted-foreground">
-          AI-powered spoilage risk analysis
+          {t("prediction.subtitle")}
         </p>
       </div>
 
@@ -71,11 +77,11 @@ export default function Prediction() {
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
-              <h2 className="text-2xl font-bold">Spoilage Risk Assessment</h2>
-              <Badge variant={config.badgeVariant}>{config.badge}</Badge>
+              <h2 className="text-2xl font-bold">{t("prediction.risk")}</h2>
+              <Badge variant={config.badgeVariant}>{t(riskConfigKeys[prediction.risk])}</Badge>
             </div>
             <p className="text-muted-foreground">
-              Based on current sensor data and historical patterns
+              {t("prediction.subtitle")}
             </p>
           </div>
         </div>
@@ -83,7 +89,7 @@ export default function Prediction() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Confidence Level</span>
+              <span className="text-sm font-medium">{t("prediction.confidence")}</span>
               <span className="text-2xl font-bold">{prediction.confidence}%</span>
             </div>
             <div className="h-2 bg-background rounded-full overflow-hidden">
@@ -97,9 +103,9 @@ export default function Prediction() {
           <div className="flex items-center gap-3">
             <Icon className={`h-12 w-12 ${config.color}`} />
             <div>
-              <p className="text-sm text-muted-foreground">Risk Level</p>
+              <p className="text-sm text-muted-foreground">{t("prediction.risk")}</p>
               <p className={`text-xl font-bold ${config.color}`}>
-                {prediction.risk.charAt(0).toUpperCase() + prediction.risk.slice(1)}
+                {t(riskConfigKeys[prediction.risk])}
               </p>
             </div>
           </div>
@@ -109,7 +115,7 @@ export default function Prediction() {
       <Card className="p-6">
         <div className="flex items-center gap-2 mb-4">
           <TrendingUp className="h-5 w-5 text-primary" />
-          <h3 className="text-lg font-semibold">Key Factors</h3>
+          <h3 className="text-lg font-semibold">{t("prediction.factors")}</h3>
         </div>
         <ul className="space-y-3">
           {prediction.factors.map((factor, index) => (
@@ -124,12 +130,12 @@ export default function Prediction() {
       <Card className="p-6 bg-primary/5 border-primary/20">
         <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
           <Brain className="h-5 w-5" />
-          Recommended Actions
+          {t("prediction.actions")}
         </h3>
         <p className="text-foreground mb-4">{prediction.recommendation}</p>
         <div className="flex gap-3">
-          <Button>View Detailed Analysis</Button>
-          <Button variant="outline">Export Report</Button>
+          <Button>{t("prediction.action.inspect")}</Button>
+          <Button variant="outline">{t("prediction.action.monitor")}</Button>
         </div>
       </Card>
     </div>

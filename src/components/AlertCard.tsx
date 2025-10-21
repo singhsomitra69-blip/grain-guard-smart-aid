@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AlertTriangle, AlertCircle, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export type AlertType = "info" | "warning" | "danger" | "prediction";
 
@@ -12,31 +13,35 @@ interface AlertCardProps {
   timestamp: string;
 }
 
+const alertTypeKeys = {
+  info: "alerts.type.info",
+  warning: "alerts.type.warning",
+  danger: "alerts.type.danger",
+  prediction: "alerts.type.prediction",
+};
+
+
 const alertConfig = {
   info: {
     icon: Info,
-    badge: "Info",
     badgeVariant: "secondary" as const,
     iconColor: "text-accent",
     className: "border-accent/20 bg-accent/5",
   },
   warning: {
     icon: AlertTriangle,
-    badge: "Warning",
     badgeVariant: "secondary" as const,
     iconColor: "text-warning",
     className: "border-warning/20 bg-warning/5",
   },
   danger: {
     icon: AlertCircle,
-    badge: "Danger",
     badgeVariant: "destructive" as const,
     iconColor: "text-destructive",
     className: "border-destructive/20 bg-destructive/5",
   },
   prediction: {
     icon: AlertTriangle,
-    badge: "AI Prediction",
     badgeVariant: "default" as const,
     iconColor: "text-primary",
     className: "border-primary/20 bg-primary/5",
@@ -46,6 +51,7 @@ const alertConfig = {
 export function AlertCard({ type, title, message, timestamp }: AlertCardProps) {
   const config = alertConfig[type];
   const Icon = config.icon;
+  const { t } = useLanguage();
 
   return (
     <Card className={cn("p-4 border-l-4", config.className)}>
@@ -57,7 +63,7 @@ export function AlertCard({ type, title, message, timestamp }: AlertCardProps) {
           <div className="flex items-start justify-between gap-2">
             <h4 className="font-semibold text-foreground">{title}</h4>
             <Badge variant={config.badgeVariant} className="text-xs">
-              {config.badge}
+              {t(alertTypeKeys[type])}
             </Badge>
           </div>
           <p className="text-sm text-muted-foreground">{message}</p>

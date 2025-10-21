@@ -1,4 +1,5 @@
 import { AlertCard, AlertType } from "@/components/AlertCard";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Alert {
   id: string;
@@ -52,12 +53,14 @@ const alerts: Alert[] = [
 ];
 
 export default function Alerts() {
+  const { t } = useLanguage();
+  
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Alerts</h1>
+        <h1 className="text-3xl font-bold text-foreground">{t("alerts.title")}</h1>
         <p className="text-muted-foreground">
-          Monitor critical events and notifications
+          {t("alerts.subtitle")}
         </p>
       </div>
 
@@ -76,7 +79,7 @@ export default function Alerts() {
       {alerts.length === 0 && (
         <div className="text-center py-12">
           <p className="text-muted-foreground">
-            No alerts at this time. All systems normal.
+            {t("alerts.no_alerts")}
           </p>
         </div>
       )}

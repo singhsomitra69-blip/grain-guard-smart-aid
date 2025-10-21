@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   LineChart,
   Line,
@@ -30,18 +31,20 @@ const generateHistoricalData = () => {
 const data = generateHistoricalData();
 
 export default function Analytics() {
+  const { t } = useLanguage();
+  
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Analytics</h1>
+        <h1 className="text-3xl font-bold text-foreground">{t("analytics.title")}</h1>
         <p className="text-muted-foreground">
-          Historical data and trends over the last 24 hours
+          {t("analytics.subtitle")}
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-6">
         <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">Temperature & Humidity</h3>
+          <h3 className="text-lg font-semibold mb-4">{t("analytics.temp_humidity")}</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -81,7 +84,7 @@ export default function Analytics() {
         </Card>
 
         <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">Gas Levels</h3>
+          <h3 className="text-lg font-semibold mb-4">{t("analytics.gas")}</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={data}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -113,7 +116,7 @@ export default function Analytics() {
         </Card>
 
         <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">Vibration Activity</h3>
+          <h3 className="text-lg font-semibold mb-4">{t("analytics.vibration")}</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />

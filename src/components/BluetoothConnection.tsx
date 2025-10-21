@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bluetooth, BluetoothConnected, BluetoothOff, Loader2 } from "lucide-react";
 import { useBluetoothSensor } from "@/hooks/useBluetoothSensor";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function BluetoothConnection() {
   const {
@@ -13,17 +14,19 @@ export function BluetoothConnection() {
     scanAndConnect,
     disconnect,
   } = useBluetoothSensor();
+  const { t } = useLanguage();
 
   if (!isSupported) {
     return (
       <Alert variant="destructive">
         <BluetoothOff className="h-4 w-4" />
         <AlertDescription>
-          Web Bluetooth is not supported in your browser. Try using Chrome, Edge, or Opera on desktop or Android.
+          {t("bluetooth.unsupported")}
         </AlertDescription>
       </Alert>
     );
   }
+
 
   return (
     <Card className="p-6">
@@ -34,14 +37,14 @@ export function BluetoothConnection() {
           <Bluetooth className="h-6 w-6 text-muted-foreground" />
         )}
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">Bluetooth Sensors</h3>
+          <h3 className="text-lg font-semibold">{t("bluetooth.title")}</h3>
           <p className="text-sm text-muted-foreground">
-            Connect to external BLE sensors
+            {connectedDevice ? t("bluetooth.status.connected") : t("bluetooth.status.disconnected")}
           </p>
         </div>
         {connectedDevice && (
           <Badge variant="default" className="bg-success">
-            Connected
+            {t("bluetooth.status.connected")}
           </Badge>
         )}
       </div>
@@ -62,23 +65,17 @@ export function BluetoothConnection() {
             className="w-full"
           >
             <Bluetooth className="h-4 w-4 mr-2" />
-            Disconnect Sensor
+            {t("bluetooth.disconnect")}
           </Button>
 
           <Alert>
             <AlertDescription className="text-xs">
-              Sensor data is being streamed in real-time to the dashboard.
+              {t("bluetooth.status.connected")}
             </AlertDescription>
           </Alert>
         </div>
       ) : (
         <div className="space-y-4">
-          <Alert>
-            <AlertDescription className="text-sm">
-              Make sure your Bluetooth sensor is powered on and in pairing mode before scanning.
-            </AlertDescription>
-          </Alert>
-
           <Button
             onClick={scanAndConnect}
             disabled={isConnecting}
@@ -87,25 +84,15 @@ export function BluetoothConnection() {
             {isConnecting ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Scanning...
+                {t("bluetooth.status.searching")}
               </>
             ) : (
               <>
                 <Bluetooth className="h-4 w-4 mr-2" />
-                Scan for Sensors
+                {t("bluetooth.scan")}
               </>
             )}
           </Button>
-
-          <div className="text-xs text-muted-foreground space-y-2">
-            <p className="font-medium">Supported Sensors:</p>
-            <ul className="list-disc list-inside space-y-1 ml-2">
-              <li>Environmental Sensing BLE devices</li>
-              <li>Temperature & Humidity sensors</li>
-              <li>Custom grain storage sensors</li>
-              <li>Compatible with standard BLE protocols</li>
-            </ul>
-          </div>
         </div>
       )}
     </Card>

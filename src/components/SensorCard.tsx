@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export type SensorStatus = "safe" | "warning" | "danger";
 
@@ -14,19 +15,23 @@ interface SensorCardProps {
   description?: string;
 }
 
+const statusConfigKeys = {
+  safe: "sensor.status.safe",
+  warning: "sensor.status.warning",
+  danger: "sensor.status.danger",
+};
+
+
 const statusConfig = {
   safe: {
-    badge: "🟢 Safe",
     badgeVariant: "default" as const,
     className: "border-success/20 bg-success/5",
   },
   warning: {
-    badge: "🟡 Warning",
     badgeVariant: "secondary" as const,
     className: "border-warning/20 bg-warning/5",
   },
   danger: {
-    badge: "🔴 Danger",
     badgeVariant: "destructive" as const,
     className: "border-destructive/20 bg-destructive/5",
   },
@@ -41,6 +46,7 @@ export function SensorCard({
   description,
 }: SensorCardProps) {
   const config = statusConfig[status];
+  const { t } = useLanguage();
 
   return (
     <Card
@@ -60,7 +66,7 @@ export function SensorCard({
             </h3>
           </div>
         </div>
-        <Badge variant={config.badgeVariant}>{config.badge}</Badge>
+        <Badge variant={config.badgeVariant}>{t(statusConfigKeys[status])}</Badge>
       </div>
 
       <div className="space-y-2">

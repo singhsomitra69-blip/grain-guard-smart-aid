@@ -68,6 +68,18 @@ const translations: Record<Language, Record<string, string>> = {
     "sensor.vibration.stable": "Stable",
     "sensor.vibration.detected": "Activity detected",
     
+    // Voice Assistant
+    "voiceAssistant": "Voice Assistant",
+    "voiceListening": "Listening...",
+    "voiceListeningDesc": "Start speaking",
+    "voiceError": "Error",
+    "voiceMicError": "Could not access microphone",
+    "voiceProcessError": "Error processing audio",
+    "voiceStop": "Stop",
+    "voiceYouSaid": "You said",
+    "voiceAssistantReply": "Assistant's reply",
+    "voiceAssistantDesc": "Press the microphone button and ask something about your grain storage",
+    
     // Alerts
     "alerts.title": "Alerts",
     "alerts.subtitle": "Recent notifications and warnings",
@@ -171,6 +183,18 @@ const translations: Record<Language, Record<string, string>> = {
     "sensor.gas.elevated": "उच्च स्तर का पता चला",
     "sensor.vibration.stable": "स्थिर",
     "sensor.vibration.detected": "गतिविधि का पता चला",
+    
+    // Voice Assistant
+    "voiceAssistant": "ध्वनि सहायक",
+    "voiceListening": "सुन रहा है...",
+    "voiceListeningDesc": "बोलना शुरू करें",
+    "voiceError": "त्रुटि",
+    "voiceMicError": "माइक्रोफ़ोन एक्सेस नहीं मिल सका",
+    "voiceProcessError": "ऑडियो प्रोसेस करने में त्रुटि",
+    "voiceStop": "रोकें",
+    "voiceYouSaid": "आपने कहा",
+    "voiceAssistantReply": "सहायक का जवाब",
+    "voiceAssistantDesc": "माइक्रोफ़ोन बटन दबाएं और अपने अनाज भंडारण के बारे में कुछ पूछें",
     
     // Alerts
     "alerts.title": "चेतावनी",
@@ -276,6 +300,18 @@ const translations: Record<Language, Record<string, string>> = {
     "sensor.vibration.stable": "સ્થિર",
     "sensor.vibration.detected": "પ્રવૃત્તિ મળી",
     
+    // Voice Assistant
+    "voiceAssistant": "વૉઇસ સહાયક",
+    "voiceListening": "સાંભળી રહ્યું છે...",
+    "voiceListeningDesc": "બોલવાનું શરૂ કરો",
+    "voiceError": "ભૂલ",
+    "voiceMicError": "માઇક્રોફોન ઍક્સેસ મેળવી શકાયું નહીં",
+    "voiceProcessError": "ઑડિયો પ્રોસેસ કરવામાં ભૂલ",
+    "voiceStop": "બંધ કરો",
+    "voiceYouSaid": "તમે કહ્યું",
+    "voiceAssistantReply": "સહાયકનો જવાબ",
+    "voiceAssistantDesc": "માઇક્રોફોન બટન દબાવો અને તમારા અનાજ સંગ્રહ વિશે કંઈક પૂછો",
+    
     // Alerts
     "alerts.title": "ચેતવણીઓ",
     "alerts.subtitle": "તાજેતરની સૂચનાઓ અને ચેતવણીઓ",
@@ -379,6 +415,18 @@ const translations: Record<Language, Record<string, string>> = {
     "sensor.gas.elevated": "उच्च पातळी आढळली",
     "sensor.vibration.stable": "स्थिर",
     "sensor.vibration.detected": "क्रियाकलाप आढळले",
+    
+    // Voice Assistant
+    "voiceAssistant": "आवाज सहाय्यक",
+    "voiceListening": "ऐकत आहे...",
+    "voiceListeningDesc": "बोलणे सुरू करा",
+    "voiceError": "त्रुटी",
+    "voiceMicError": "मायक्रोफोन प्रवेश मिळू शकला नाही",
+    "voiceProcessError": "ऑडिओ प्रक्रिया करताना त्रुटी",
+    "voiceStop": "थांबवा",
+    "voiceYouSaid": "तुम्ही म्हणालात",
+    "voiceAssistantReply": "सहाय्यकाचे उत्तर",
+    "voiceAssistantDesc": "मायक्रोफोन बटण दाबा आणि तुमच्या धान्य साठवणुकीबद्दल काहीतरी विचारा",
     
     // Alerts
     "alerts.title": "इशारे",
@@ -484,6 +532,18 @@ const translations: Record<Language, Record<string, string>> = {
     "sensor.vibration.stable": "நிலையானது",
     "sensor.vibration.detected": "செயல்பாடு கண்டறியப்பட்டது",
     
+    // Voice Assistant
+    "voiceAssistant": "குரல் உதவியாளர்",
+    "voiceListening": "கேட்கிறது...",
+    "voiceListeningDesc": "பேசத் தொடங்குங்கள்",
+    "voiceError": "பிழை",
+    "voiceMicError": "மைக்ரோஃபோன் அணுகல் கிடைக்கவில்லை",
+    "voiceProcessError": "ஆடியோ செயலாக்கத்தில் பிழை",
+    "voiceStop": "நிறுத்து",
+    "voiceYouSaid": "நீங்கள் கூறியது",
+    "voiceAssistantReply": "உதவியாளர் பதில்",
+    "voiceAssistantDesc": "மைக்ரோஃபோன் பொத்தானை அழுத்தி உங்கள் தானிய சேமிப்பைப் பற்றி கேளுங்கள்",
+    
     // Alerts
     "alerts.title": "எச்சரிக்கைகள்",
     "alerts.subtitle": "சமீபத்திய அறிவிப்புகள் மற்றும் எச்சரிக்கைகள்",
@@ -587,6 +647,18 @@ const translations: Record<Language, Record<string, string>> = {
     "sensor.gas.elevated": "అధిక స్థాయిలు గుర్తించబడ్డాయి",
     "sensor.vibration.stable": "స్థిరమైనది",
     "sensor.vibration.detected": "కార్యాచరణ గుర్తించబడింది",
+    
+    // Voice Assistant
+    "voiceAssistant": "వాయిస్ అసిస్టెంట్",
+    "voiceListening": "వింటోంది...",
+    "voiceListeningDesc": "మాట్లాడటం ప్రారంభించండి",
+    "voiceError": "లోపం",
+    "voiceMicError": "మైక్రోఫోన్ యాక్సెస్ పొందలేకపోయింది",
+    "voiceProcessError": "ఆడియో ప్రాసెసింగ్‌లో లోపం",
+    "voiceStop": "ఆపు",
+    "voiceYouSaid": "మీరు చెప్పారు",
+    "voiceAssistantReply": "అసిస్టెంట్ సమాధానం",
+    "voiceAssistantDesc": "మైక్రోఫోన్ బటన్ నొక్కి మీ ధాన్యం నిల్వ గురించి ఏదైనా అడగండి",
     
     // Alerts
     "alerts.title": "హెచ్చరికలు",
@@ -1003,6 +1075,18 @@ const translations: Record<Language, Record<string, string>> = {
     "sensor.gas.elevated": "ಹೆಚ್ಚಿನ ಮಟ್ಟಗಳು ಕಂಡುಬಂದಿವೆ",
     "sensor.vibration.stable": "ಸ್ಥಿರ",
     "sensor.vibration.detected": "ಚಟುವಟಿಕೆ ಪತ್ತೆಯಾಗಿದೆ",
+    
+    // Voice Assistant
+    "voiceAssistant": "ವಾಯ್ಸ್ ಅಸಿಸ್ಟೆಂಟ್",
+    "voiceListening": "ಕೇಳುತ್ತಿದೆ...",
+    "voiceListeningDesc": "ಮಾತನಾಡಲು ಪ್ರಾರಂಭಿಸಿ",
+    "voiceError": "ದೋಷ",
+    "voiceMicError": "ಮೈಕ್ರೊಫೋನ್ ಪ್ರವೇಶ ಸಿಗಲಿಲ್ಲ",
+    "voiceProcessError": "ಆಡಿಯೋ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ ದೋಷ",
+    "voiceStop": "ನಿಲ್ಲಿಸಿ",
+    "voiceYouSaid": "ನೀವು ಹೇಳಿದ್ದು",
+    "voiceAssistantReply": "ಸಹಾಯಕನ ಉತ್ತರ",
+    "voiceAssistantDesc": "ಮೈಕ್ರೊಫೋನ್ ಬಟನ್ ಒತ್ತಿ ನಿಮ್ಮ ಧಾನ್ಯ ಸಂಗ್ರಹಣೆ ಬಗ್ಗೆ ಏನಾದರೂ ಕೇಳಿ",
     
     // Alerts
     "alerts.title": "ಎಚ್ಚರಿಕೆಗಳು",

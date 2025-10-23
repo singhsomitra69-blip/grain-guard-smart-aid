@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { SensorCard, SensorStatus } from "@/components/SensorCard";
+import { VoiceAssistant } from "@/components/VoiceAssistant";
 import { Thermometer, Droplets, Wind, Activity } from "lucide-react";
 import { useBluetoothSensor } from "@/hooks/useBluetoothSensor";
+import { BluetoothConnection } from "@/components/BluetoothConnection";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -75,6 +77,14 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
+      <div className="mb-6 flex justify-end">
+        <BluetoothConnection />
+      </div>
+
+      <div className="mb-6">
+        <VoiceAssistant sensorData={sensorData} />
+      </div>
+
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground">{t("dashboard.title")}</h1>

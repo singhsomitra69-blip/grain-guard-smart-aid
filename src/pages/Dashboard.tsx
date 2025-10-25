@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SensorCard, SensorStatus } from "@/components/SensorCard";
 import { VoiceAssistant } from "@/components/VoiceAssistant";
+import { ChatPanel } from "@/components/ChatPanel";
 import { Thermometer, Droplets, Wind, Activity } from "lucide-react";
 import { useBluetoothSensor } from "@/hooks/useBluetoothSensor";
 import { BluetoothConnection } from "@/components/BluetoothConnection";
@@ -81,8 +82,9 @@ export default function Dashboard() {
         <BluetoothConnection />
       </div>
 
-      <div className="mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <VoiceAssistant sensorData={sensorData} />
+        <ChatPanel sensorData={sensorData} />
       </div>
 
       <div className="flex items-center justify-between">

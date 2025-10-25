@@ -80,6 +80,16 @@ const translations: Record<Language, Record<string, string>> = {
     "voiceAssistantReply": "Assistant's reply",
     "voiceAssistantDesc": "Press the microphone button and ask something about your grain storage",
     
+    // Chat Panel
+    "chatPanel": "Text Chat",
+    "chatPanelDesc": "Ask me anything about your grain storage",
+    "chatCommands": "Try these commands",
+    "chatCommandTemp": "What's the temperature?",
+    "chatCommandGas": "Check gas level",
+    "chatCommandHumidity": "How's the humidity?",
+    "chatCommandStatus": "Overall status",
+    "chatPlaceholder": "Type your message... (Enter to send)",
+    
     // Alerts
     "alerts.title": "Alerts",
     "alerts.subtitle": "Recent notifications and warnings",
@@ -196,6 +206,16 @@ const translations: Record<Language, Record<string, string>> = {
     "voiceAssistantReply": "सहायक का जवाब",
     "voiceAssistantDesc": "माइक्रोफ़ोन बटन दबाएं और अपने अनाज भंडारण के बारे में कुछ पूछें",
     
+    // Chat Panel
+    "chatPanel": "टेक्स्ट चैट",
+    "chatPanelDesc": "अपने अनाज भंडारण के बारे में मुझसे कुछ भी पूछें",
+    "chatCommands": "ये कमांड आज़माएं",
+    "chatCommandTemp": "तापमान क्या है?",
+    "chatCommandGas": "गैस स्तर जांचें",
+    "chatCommandHumidity": "नमी कैसी है?",
+    "chatCommandStatus": "समग्र स्थिति",
+    "chatPlaceholder": "अपना संदेश लिखें... (भेजने के लिए Enter दबाएं)",
+    
     // Alerts
     "alerts.title": "चेतावनी",
     "alerts.subtitle": "हाल की सूचनाएं और चेतावनियां",
@@ -311,6 +331,16 @@ const translations: Record<Language, Record<string, string>> = {
     "voiceYouSaid": "તમે કહ્યું",
     "voiceAssistantReply": "સહાયકનો જવાબ",
     "voiceAssistantDesc": "માઇક્રોફોન બટન દબાવો અને તમારા અનાજ સંગ્રહ વિશે કંઈક પૂછો",
+    
+    // Chat Panel
+    "chatPanel": "ટેક્સ્ટ ચેટ",
+    "chatPanelDesc": "તમારા અનાજ સંગ્રહ વિશે મને કંઈપણ પૂછો",
+    "chatCommands": "આ કમાન્ડ અજમાવો",
+    "chatCommandTemp": "તાપમાન કેટલું છે?",
+    "chatCommandGas": "ગેસ સ્તર તપાસો",
+    "chatCommandHumidity": "ભેજ કેવો છે?",
+    "chatCommandStatus": "એકંદર સ્થિતિ",
+    "chatPlaceholder": "તમારો સંદેશ લખો... (મોકલવા માટે Enter દબાવો)",
     
     // Alerts
     "alerts.title": "ચેતવણીઓ",

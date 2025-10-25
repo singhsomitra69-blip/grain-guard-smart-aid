@@ -26,9 +26,6 @@ export function Navigation() {
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border p-4 md:relative md:border-t-0 md:border-r md:w-64 md:min-h-screen md:p-6">
       <div className="hidden md:flex items-center gap-2 mb-8">
-        <div className="p-2 bg-primary rounded-lg">
-          <Wheat className="h-6 w-6 text-primary-foreground" />
-        </div>
         <h1 className="text-xl font-bold text-foreground">GrainGuard</h1>
       </div>
 

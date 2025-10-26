@@ -4,6 +4,7 @@ import { VoiceAssistant } from "@/components/VoiceAssistant";
 import { ChatPanel } from "@/components/ChatPanel";
 import { Thermometer, Droplets, Wind, Activity } from "lucide-react";
 import { useBluetoothSensor } from "@/hooks/useBluetoothSensor";
+import { useSensorNotifications } from "@/hooks/useSensorNotifications";
 import { BluetoothConnection } from "@/components/BluetoothConnection";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -64,6 +65,9 @@ export default function Dashboard() {
         timestamp: bluetoothData.timestamp,
       }
     : simulatedData;
+
+  // Monitor sensor data and send notifications
+  useSensorNotifications(sensorData);
 
   useEffect(() => {
     // Only run simulated updates if not connected to Bluetooth

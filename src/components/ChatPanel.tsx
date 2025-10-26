@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -28,6 +28,27 @@ export function ChatPanel({ sensorData }: ChatPanelProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { language, t } = useLanguage();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playAudio = async (text: string) => {
+    try {
+      const { data, error } = await supabase.functions.invoke('text-to-speech', {
+        body: { text, voice: 'alloy' },
+      });
+
+      if (error) throw error;
+
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+
+      const audio = new Audio(`data:audio/mp3;base64,${data.audioContent}`);
+      audioRef.current = audio;
+      audio.play();
+    } catch (error) {
+      console.error('Error playing audio:', error);
+    }
+  };
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -48,7 +69,11 @@ export function ChatPanel({ sensorData }: ChatPanelProps) {
 
       if (error) throw error;
 
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
+      const assistantMessage = data.reply;
+      setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
+      
+      // Speak the AI response
+      await playAudio(assistantMessage);
     } catch (error) {
       console.error('Error getting AI response:', error);
       toast({
